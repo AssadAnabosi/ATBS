@@ -35,7 +35,7 @@ public sealed class ManagerMenu
                     Console.WriteLine("To Be Implemented");
                     break;
                 case "4":
-                    Console.WriteLine("To Be Implemented");
+                    await ViewAllFlightsAsync();
                     break;
                 case "0":
                     return;
@@ -62,6 +62,22 @@ public sealed class ManagerMenu
         foreach (var error in result.Errors)
         {
             Console.WriteLine($"\t{error}");
+        }
+    }
+    
+    private async Task ViewAllFlightsAsync()
+    {
+        var flights = await _flights.GetAllAsync();
+        if (flights.Count == 0)
+        {
+            Console.WriteLine("No flights in the store yet. Import some first.");
+            return;
+        }
+
+        Console.WriteLine($"{flights.Count} flight(s):");
+        foreach (var flight in flights)
+        {
+            Console.WriteLine($"  {flight}");
         }
     }
 }
