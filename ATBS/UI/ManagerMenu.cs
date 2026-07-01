@@ -1,7 +1,15 @@
+using ATBS.Services;
+
 namespace ATBS.UI;
 
 public sealed class ManagerMenu
 {
+    private FlightService _flights;
+    
+    public ManagerMenu(FlightService flights)
+    {
+        _flights = flights;
+    }
     public async Task RunAsync()
     {
         while (true)
@@ -18,7 +26,7 @@ public sealed class ManagerMenu
             switch (Console.ReadLine())
             {
                 case "1":
-                    Console.WriteLine("To Be Implemented");
+                    await ImportFlightsAsync();
                     break;
                 case "2":
                     Console.WriteLine("To Be Implemented");
@@ -35,6 +43,25 @@ public sealed class ManagerMenu
                     Console.WriteLine("Unknown option.");
                     break;
             }
+        }
+    }
+
+    private async Task ImportFlightsAsync()
+    {
+        string DataDirectory = Path.Combine(AppContext.BaseDirectory, "Data");
+        var path = Path.Combine(DataDirectory, "sample-flights.csv");
+
+        if (!File.Exists(path))
+        {
+            Console.WriteLine($"File not found: {path}");
+            return;
+        }
+        var result = await _flights.ImportFromCsvAsync(path);
+        Console.WriteLine($"Imported {result.ImportedFlights.Count} flight(s); {result.Errors.Count} row(s) rejected.");
+
+        foreach (var error in result.Errors)
+        {
+            Console.WriteLine($"\t{error}");
         }
     }
 }

@@ -7,8 +7,13 @@
 public sealed class MainMenu
 {
     private readonly PassengerMenu _passengerMenu = new();
-    private readonly ManagerMenu _managerMenu =  new();
+    private readonly ManagerMenu _managerMenu;
 
+    public MainMenu(ManagerMenu managerMenu)
+    {
+        _managerMenu = managerMenu;
+    }
+    
     public async Task RunAsync()
     {
         Console.WriteLine("Airport Ticket Booking System");
