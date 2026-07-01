@@ -18,7 +18,21 @@ public class CsvHelper
             .Select((line, index) => (line, lineNumber: index + 1))
             .Skip(1)
             .Where(x => !string.IsNullOrWhiteSpace(x.line))
-            .Select(x => new CsvRow(x.lineNumber, x.line.Split(',')))
+            .Select(x => new CsvRow(x.lineNumber, x.line.Split(Constants.Csv.Delimiter)))
             .ToList();
+    }
+    
+    public static async Task WriteAsync<T>(string path, string header, IEnumerable<T> items, Func<T, string> toRow)
+    {
+        var directory = Path.GetDirectoryName(path);
+        if (!string.IsNullOrEmpty(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        var lines = new List<string> { header };
+        lines.AddRange(items.Select(toRow));
+
+        await File.WriteAllLinesAsync(path, lines);
     }
 }

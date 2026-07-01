@@ -7,6 +7,7 @@ namespace ATBS.Repositories;
 public class FlightCsv
 {
     private const int ExpectedColumns = 10;
+
     public static Flight FromRow(string[] fields)
     {
         if (fields.Length < ExpectedColumns)
@@ -31,4 +32,18 @@ public class FlightCsv
             }
         };
     }
+
+    public static string ToRow(Flight flight) =>
+        string.Join(Constants.Csv.Delimiter, [
+            flight.FlightId.ToString(),
+            flight.DepartureCountry,
+            flight.DepartureAirport,
+            flight.DepartureDate.ToString("yyyy-MM-ddTHH:mm:ss"),
+            flight.DestinationCountry,
+            flight.ArrivalAirport,
+            flight.ArrivalDate.ToString("yyyy-MM-ddTHH:mm:ss"),
+            flight.CabinPrices[CabinClass.Economy].ToString(),
+            flight.CabinPrices[CabinClass.Business].ToString(),
+            flight.CabinPrices[CabinClass.First].ToString()
+        ]);
 }

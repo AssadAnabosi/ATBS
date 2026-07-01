@@ -34,7 +34,14 @@ public class FlightService
 
             imported.Add(flight);
         }
+        
+        if (imported.Count > 0)
+        {
+            await _flights.AddRangeAsync(imported);
+        }
 
         return new ImportResult { ImportedFlights = imported, Errors = errors };
     }
+    
+    public Task<List<Flight>> GetAllAsync() => _flights.GetAllAsync();
 }
