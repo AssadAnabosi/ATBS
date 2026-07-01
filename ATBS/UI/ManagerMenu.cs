@@ -32,7 +32,7 @@ public sealed class ManagerMenu
                     Console.WriteLine("To Be Implemented");
                     break;
                 case "3":
-                    Console.WriteLine("To Be Implemented");
+                    ShowConstraints();
                     break;
                 case "4":
                     await ViewAllFlightsAsync();
@@ -78,6 +78,16 @@ public sealed class ManagerMenu
         foreach (var flight in flights)
         {
             Console.WriteLine($"  {flight}");
+        }
+    }
+    
+    private void ShowConstraints()
+    {
+        Console.WriteLine();
+        Console.WriteLine("--- Flight model validation constraints ---");
+        foreach (var constraint in _flights.GetFlightConstraints())
+        {
+            Console.WriteLine($"  {constraint}");
         }
     }
 }
