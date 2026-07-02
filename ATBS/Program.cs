@@ -11,7 +11,7 @@ var flightService = new FlightService(flightRepository,  validationService);
 var bookingSerivce = new BookingService(bookingRepository, flightRepository);
 
 var passengerMenu = new PassengerMenu(bookingSerivce, flightService);
-var managerMenu = new ManagerMenu(flightService);
+var managerMenu = new ManagerMenu(flightService, bookingSerivce);
 
 var mainMenu = new MainMenu(passengerMenu, managerMenu);
 
