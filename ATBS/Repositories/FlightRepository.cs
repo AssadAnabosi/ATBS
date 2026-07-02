@@ -11,7 +11,12 @@ public class FlightRepository
     {
         var rows = await CsvHelper.ReadRowsAsync(Constants.Files.Flights);
         return rows.Select(row => FlightCsv.FromRow(row.Fields)).ToList();
-    } 
+    }
+
+    public async Task<Flight> GetByIdAsync(int flightId)
+    {
+        return (await GetAllAsync()).Where(f => f.FlightId == flightId).FirstOrDefault();
+    }
     
     public async Task AddRangeAsync(IEnumerable<Flight> flights)
     {

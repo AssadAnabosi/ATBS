@@ -6,10 +6,12 @@ namespace ATBS.UI;
 
 public sealed class PassengerMenu
 {
+    private readonly BookingService _bookings;
     private readonly FlightService _flights;
 
-    public PassengerMenu(FlightService flights)
+    public PassengerMenu(BookingService bookings, FlightService flights)
     {
+        _bookings = bookings;
         _flights = flights;
     }
 
@@ -37,7 +39,7 @@ public sealed class PassengerMenu
                     await SearchFlightsAsync();
                     break;
                 case "2":
-                    Console.WriteLine("To Be Implemented");
+                    await BookFlightAsync(email, name);
                     break;
                 case "3":
                     Console.WriteLine("To Be Implemented");
@@ -81,5 +83,25 @@ public sealed class PassengerMenu
             {
                 Console.WriteLine(result);
             }
+    }
+
+    private async Task BookFlightAsync(string email, string name)
+    {
+        Console.WriteLine();
+        await SearchFlightsAsync();
+        
+        var flightId = ConsoleInput.ReadRequiredInt("Flight ID: ");
+        var CabinClass = ConsoleInput.ReadRequiredClass("CabinClass");
+
+        try
+        {
+            var (booking, flight) = await _bookings.BookFlightAsync(flightId, email, name,  CabinClass);
+            Console.WriteLine("Booked!");
+            Console.WriteLine(booking);
+            Console.WriteLine("\t" + flight);
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

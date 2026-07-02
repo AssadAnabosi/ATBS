@@ -6,6 +6,7 @@ public class Constants
     public static class Files
     {
         public static readonly string Flights = Path.Combine(DataDirectory, "flights.csv");
+        public static readonly string Bookings = Path.Combine(DataDirectory, "bookings.csv");
         public static readonly string SampleFlights = Path.Combine(DataDirectory, "sample-flights.csv");
     }
     
@@ -16,6 +17,9 @@ public class Constants
         // Column order is the single source of truth for both reading and writing.
         public const string FlightHeader =
             "FlightId,DepartureCountry,DepartureAirport,DepartureDate,DestinationCountry,ArrivalAirport,ArrivalDate,EconomyPrice,BusinessPrice,FirstPrice";
+
+        public const string BookingHeader =
+            "BookingId,FlightId,PassengerEmail,PassengerName,CabinClass,Price,BookingDate,Status";
         
     }
 }

@@ -5,9 +5,12 @@ using ATBS.Repositories;
 var flightRepository = new FlightRepository();
 var validationService = new ValidationService();
 
-var flightService = new FlightService(flightRepository,  validationService);
+var bookingRepository = new  BookingRepository();
 
-var passengerMenu = new PassengerMenu(flightService);
+var flightService = new FlightService(flightRepository,  validationService);
+var bookingSerivce = new BookingService(bookingRepository, flightRepository);
+
+var passengerMenu = new PassengerMenu(bookingSerivce, flightService);
 var managerMenu = new ManagerMenu(flightService);
 
 var mainMenu = new MainMenu(passengerMenu, managerMenu);

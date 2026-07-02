@@ -4,6 +4,19 @@ namespace ATBS.Utils;
 
 public class ConsoleInput
 {
+    public static int ReadRequiredInt(string prompt)
+    {
+        while (true)
+        {
+            var value = ReadRequiredText(prompt);
+            if (int.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            Console.WriteLine("  Please enter a valid integer.");
+        }
+    }
     public static string ReadRequiredText(string prompt)
     {
         while (true)
