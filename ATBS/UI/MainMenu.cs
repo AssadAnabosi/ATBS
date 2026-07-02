@@ -6,11 +6,12 @@
 /// </summary>
 public sealed class MainMenu
 {
-    private readonly PassengerMenu _passengerMenu = new();
+    private readonly PassengerMenu _passengerMenu;
     private readonly ManagerMenu _managerMenu;
 
-    public MainMenu(ManagerMenu managerMenu)
+    public MainMenu(PassengerMenu passengerMenu, ManagerMenu managerMenu)
     {
+        _passengerMenu = passengerMenu;
         _managerMenu = managerMenu;
     }
     

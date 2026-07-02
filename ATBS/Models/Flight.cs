@@ -43,7 +43,6 @@ public class Flight
     public required Dictionary<CabinClass, float> CabinPrices { get; set; }
 
     public override string ToString() =>
-        $"[{FlightId}]\n" +
         $"{DepartureCountry} ({DepartureAirport}) -> {DestinationCountry} ({ArrivalAirport})" +
         $"on {DepartureDate:yyyy-MM-dd} | Eco {CabinPrices[CabinClass.Economy]} / Bus {CabinPrices[CabinClass.Business]} / First {CabinPrices[CabinClass.First]}";
 
