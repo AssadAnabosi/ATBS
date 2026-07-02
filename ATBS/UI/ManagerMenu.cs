@@ -1,4 +1,5 @@
 using ATBS.Services;
+using ATBS.Utils;
 
 namespace ATBS.UI;
 
@@ -21,9 +22,8 @@ public sealed class ManagerMenu
             Console.WriteLine("3) Show flight validation constraints");
             Console.WriteLine("4) View all flights");
             Console.WriteLine("0) Logout");
-            Console.Write("Choose an option: ");
             
-            switch (Console.ReadLine())
+            switch (ConsoleInput.ReadRequiredText("Choose an option: "))
             {
                 case "1":
                     await ImportFlightsAsync();

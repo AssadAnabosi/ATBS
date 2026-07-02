@@ -1,4 +1,6 @@
-﻿namespace ATBS.UI;
+﻿using ATBS.Utils;
+
+namespace ATBS.UI;
 
 /// <summary>
 /// Top-level role selection. Choosing a role opens that role's menu; logging out of a role returns
@@ -26,9 +28,8 @@ public sealed class MainMenu
             Console.WriteLine("1) Passenger");
             Console.WriteLine("2) Manager");
             Console.WriteLine("0) Quit");
-            Console.Write("Choose an option: ");
             
-            switch (Console.ReadLine())
+            switch (ConsoleInput.ReadRequiredText("Choose an option: "))
             {
                 case "1":
                     await _passengerMenu.RunAsync();

@@ -17,10 +17,8 @@ public sealed class PassengerMenu
     {
         Console.WriteLine();
         Console.WriteLine("--- Passenger sign-in ---");
-        Console.WriteLine("Your email: ");
-        var email = Console.ReadLine();
-        Console.WriteLine("Your name: ");
-        var name = Console.ReadLine();
+        var email = ConsoleInput.ReadRequiredText("Your email: ");
+        var name = ConsoleInput.ReadRequiredText("Your name: ");
 
         while (true)
         {
@@ -32,9 +30,8 @@ public sealed class PassengerMenu
             Console.WriteLine("4) Modify a booking");
             Console.WriteLine("5) Cancel a booking");
             Console.WriteLine("0) Logout");
-            Console.WriteLine("Choose an option: ");
 
-            switch (Console.ReadLine())
+            switch (ConsoleInput.ReadRequiredText("Choose an option: "))
             {
                 case "1":
                     await SearchFlightsAsync();
