@@ -42,7 +42,7 @@ public sealed class PassengerMenu
                     await BookFlightAsync(email, name);
                     break;
                 case "3":
-                    Console.WriteLine("To Be Implemented");
+                    await GetPassengerBookingsAsync(email, name);
                     break;
                 case "4":
                     Console.WriteLine("To Be Implemented");
@@ -103,5 +103,30 @@ public sealed class PassengerMenu
         {
             Console.WriteLine(ex.Message);
         }
+    }
+
+    private async Task GetPassengerBookingsAsync(string email, string name)
+    {
+        var bookings = await _bookings.GetPassengerBookings(email, name);
+        if (bookings.Count == 0)
+        {
+            Console.WriteLine("No bookings found.");
+            return;
+        }
+
+        var flightCache = new Dictionary<int, Flight?>();
+
+        foreach (var booking in bookings)
+        {
+            if (!flightCache.TryGetValue(booking.FlightId, out var flight))
+            {
+                flight = await _flights.GetByIdAsync(booking.FlightId);
+                flightCache[booking.FlightId] = flight;
+            }
+
+            Console.WriteLine(booking);
+            Console.WriteLine("\t" + flight);
+        }
+        
     }
 }

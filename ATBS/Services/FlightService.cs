@@ -53,6 +53,8 @@ public class FlightService
     }
 
     public Task<List<Flight>> GetAllAsync() => _flights.GetAllAsync();
+    
+    public Task<Flight> GetByIdAsync(int id) => _flights.GetByIdAsync(id);
 
     public List<FieldConstraint> GetFlightConstraints() =>
         _validation.DescribeConstraints<Flight>();

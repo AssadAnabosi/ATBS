@@ -2,11 +2,12 @@
 using ATBS.Models;
 
 namespace ATBS.Repositories;
+
 public class BookingRepository
 {
     public Task<List<CsvRow>> ReadRawRowsAsync(string path) =>
         CsvHelper.ReadRowsAsync(path);
-    
+
     public async Task<List<Booking>> GetAllAsync()
     {
         var rows = await CsvHelper.ReadRowsAsync(Constants.Files.Bookings);
@@ -15,7 +16,11 @@ public class BookingRepository
 
     public async Task<Booking?> GetByIdAsync(int bookingId) =>
         (await GetAllAsync()).FirstOrDefault(booking => booking.BookingId == bookingId);
-    
+
+    public async Task<List<Booking>> GetPassengerBookings(string email, string name) =>
+        (await GetAllAsync()).Where(booking =>
+            booking.PassengerEmail == email && booking.PassengerName == name).ToList();
+
     public async Task AddAsync(Booking booking)
     {
         await AddRangeAsync([booking]);

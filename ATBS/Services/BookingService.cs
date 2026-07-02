@@ -13,6 +13,12 @@ public class BookingService
         _bookings = bookings;
         _flights = flights;
     }
+    
+    public Task<List<Booking>> GetAllAsync() => _bookings.GetAllAsync();
+    
+    public Task<Booking> GetByIdAsync(int id) => _bookings.GetByIdAsync(id);
+    
+    public Task<List<Booking>> GetPassengerBookings(string passengerEmail, string passengerName) => _bookings.GetPassengerBookings(passengerEmail, passengerName);
 
     public async Task<(Booking, Flight)> BookFlightAsync(int flightId, string passengerEmail, string passengerName,
         CabinClass cabinClass)
