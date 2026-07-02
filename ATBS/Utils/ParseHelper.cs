@@ -4,10 +4,10 @@ namespace ATBS.Utils;
 
 public static class ParseHelper
 {
-    public static Guid ParseGuid(string value, string field) =>
-        Guid.TryParse(value.Trim(), out var result)
+    public static int ParseInt(string value, string field) =>
+        int.TryParse(value.Trim(), out var result)
             ? result
-            : throw new FormatException($"{field} '{value}' is not a valid GUID.");
+            : throw new FormatException($"{field} '{value}' is not a valid integer.");
 
     public static float ParseFloat(string value, string field) =>
         float.TryParse(value.Trim(), out var result)

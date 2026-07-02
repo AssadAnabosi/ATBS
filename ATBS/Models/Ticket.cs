@@ -8,8 +8,8 @@ public enum Status
 
 public class Ticket
 {
-    public Guid TicketId { get; set; }
-    public Guid FlightId { get; set; }
+    public int TicketId { get; set; }
+    public int FlightId { get; set; }
     public string PassengerEmail { get; set; } = string.Empty;
     public CabinClass CabinClass { get; set; }
     public decimal Price { get; set; }

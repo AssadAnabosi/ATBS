@@ -17,7 +17,7 @@ public class FlightCsv
 
         return new Flight
         {
-            FlightId = ParseHelper.ParseGuid(fields[0], "FlightId"),
+            FlightId = ParseHelper.ParseInt(fields[0], "FlightId"),
             DepartureCountry = fields[1].Trim(),
             DepartureAirport = fields[2].Trim(),
             DepartureDate = ParseHelper.ParseDate(fields[3], "DepartureDate"),

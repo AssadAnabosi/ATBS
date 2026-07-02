@@ -12,7 +12,7 @@ public enum CabinClass
 
 public class Flight
 {
-    public required Guid FlightId { get; set; }
+    public required int FlightId { get; set; }
     
     [Required]
     [StringLength(60)]
@@ -43,7 +43,8 @@ public class Flight
     public required Dictionary<CabinClass, float> CabinPrices { get; set; }
 
     public override string ToString() =>
-        $"{DepartureCountry} ({DepartureAirport}) -> {DestinationCountry} ({ArrivalAirport})" +
+        $"[{FlightId}] " +
+        $"{DepartureCountry} ({DepartureAirport}) -> {DestinationCountry} ({ArrivalAirport}) " +
         $"on {DepartureDate:yyyy-MM-dd} | Eco {CabinPrices[CabinClass.Economy]} / Bus {CabinPrices[CabinClass.Business]} / First {CabinPrices[CabinClass.First]}";
 
 }
