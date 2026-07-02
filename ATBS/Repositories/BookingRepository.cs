@@ -31,4 +31,14 @@ public class BookingRepository
         var all = (await GetAllAsync()).Concat(bookings);
         await CsvHelper.WriteAsync(Constants.Files.Bookings, Constants.Csv.BookingHeader, all, BookingCsv.ToRow);
     }
+
+    public async Task UpdateAsync(Booking updated)
+    {
+        var all = await GetAllAsync();
+        var index = all.FindIndex(b => b.BookingId == updated.BookingId);
+        if (index < 0)
+            throw new InvalidOperationException($"Booking {updated.BookingId} not found");
+        all[index] = updated;
+        await CsvHelper.WriteAsync(Constants.Files.Bookings, Constants.Csv.BookingHeader, all, BookingCsv.ToRow);
+    }
 }

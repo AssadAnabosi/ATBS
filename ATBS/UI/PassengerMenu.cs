@@ -45,10 +45,10 @@ public sealed class PassengerMenu
                     await GetPassengerBookingsAsync(email, name);
                     break;
                 case "4":
-                    Console.WriteLine("To Be Implemented");
+                    await ModifyBookingAsync(email, name);
                     break;
                 case "5":
-                    Console.WriteLine("To Be Implemented");
+                    await CancelBookingAsync(email, name);
                     break;
                 case "0":
                     return;
@@ -89,29 +89,30 @@ public sealed class PassengerMenu
     {
         Console.WriteLine();
         await SearchFlightsAsync();
-        
+
         var flightId = ConsoleInput.ReadRequiredInt("Flight ID: ");
         var CabinClass = ConsoleInput.ReadRequiredClass("CabinClass");
 
         try
         {
-            var (booking, flight) = await _bookings.BookFlightAsync(flightId, email, name,  CabinClass);
+            var (booking, flight) = await _bookings.BookFlightAsync(flightId, email, name, CabinClass);
             Console.WriteLine("Booked!");
             Console.WriteLine(booking);
             Console.WriteLine("\t" + flight);
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
     }
 
-    private async Task GetPassengerBookingsAsync(string email, string name)
+    private async Task<bool> GetPassengerBookingsAsync(string email, string name)
     {
         var bookings = await _bookings.GetPassengerBookings(email, name);
         if (bookings.Count == 0)
         {
             Console.WriteLine("No bookings found.");
-            return;
+            return false;
         }
 
         var flightCache = new Dictionary<int, Flight?>();
@@ -127,6 +128,51 @@ public sealed class PassengerMenu
             Console.WriteLine(booking);
             Console.WriteLine("\t" + flight);
         }
-        
+
+        return true;
+    }
+
+    private async Task ModifyBookingAsync(string email, string name)
+    {
+        Console.WriteLine();
+        var hasBookings = await GetPassengerBookingsAsync(email, name);
+        if (!hasBookings)
+            return;
+
+        var bookingId = ConsoleInput.ReadRequiredInt("Booking ID to modify: ");
+        var newClass = ConsoleInput.ReadRequiredClass("New CabinClass");
+
+        try
+        {
+            var (booking, flight) = await _bookings.ModifyBookingAsync(bookingId, email, name, newClass);
+            Console.WriteLine("Booking modified!");
+            Console.WriteLine(booking);
+            Console.WriteLine("\t" + flight);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task CancelBookingAsync(string email, string name)
+    {
+        Console.WriteLine();
+        var hasBookings = await GetPassengerBookingsAsync(email, name);
+        if (!hasBookings)
+            return;
+
+        var bookingId = ConsoleInput.ReadRequiredInt("Booking ID to cancel: ");
+
+        try
+        {
+            var booking = await _bookings.CancelBookingAsync(bookingId, email, name);
+            Console.WriteLine("Booking cancelled.");
+            Console.WriteLine(booking);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

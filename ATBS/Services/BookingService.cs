@@ -43,4 +43,35 @@ public class BookingService
         await _bookings.AddAsync(booking);
         return (booking, flight);
     }
+
+    public async Task<(Booking, Flight)> ModifyBookingAsync(int bookingId, string passengerEmail, string passengerName,
+        CabinClass newClass)
+    {
+        var booking = await _bookings.GetByIdAsync(bookingId)
+                      ?? throw new InvalidOperationException($"Booking {bookingId} not found");
+
+        if (booking.Status == Status.Cancelled)
+            throw new InvalidOperationException("Cannot modify a cancelled booking");
+
+        var flight = await _flights.GetByIdAsync(booking.FlightId)
+                     ?? throw new InvalidOperationException($"Flight {booking.FlightId} no longer exists");
+
+        booking.CabinClass = newClass;
+        booking.Price = flight.CabinPrices[newClass];
+        await _bookings.UpdateAsync(booking);
+        return (booking, flight);
+    }
+
+    public async Task<Booking> CancelBookingAsync(int bookingId, string passengerEmail, string passengerName)
+    {
+        var booking = await _bookings.GetByIdAsync(bookingId)
+                      ?? throw new InvalidOperationException($"Booking {bookingId} not found");
+
+        if (booking.Status == Status.Cancelled)
+            throw new InvalidOperationException("Booking is already cancelled");
+
+        booking.Status = Status.Cancelled;
+        await _bookings.UpdateAsync(booking);
+        return booking;
+    }
 }
