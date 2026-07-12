@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATBS", "ATBS\ATBS.csproj", "{62036DB8-52FB-4DAB-8011-5650C8958917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATBS.Tests", "ATBS.Tests\ATBS.Tests.csproj", "{10572C19-6A93-490C-B0D6-B290C58DE01E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{62036DB8-52FB-4DAB-8011-5650C8958917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62036DB8-52FB-4DAB-8011-5650C8958917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62036DB8-52FB-4DAB-8011-5650C8958917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10572C19-6A93-490C-B0D6-B290C58DE01E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10572C19-6A93-490C-B0D6-B290C58DE01E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10572C19-6A93-490C-B0D6-B290C58DE01E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10572C19-6A93-490C-B0D6-B290C58DE01E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
