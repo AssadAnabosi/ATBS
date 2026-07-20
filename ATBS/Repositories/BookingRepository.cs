@@ -3,7 +3,7 @@ using ATBS.Models;
 
 namespace ATBS.Repositories;
 
-public class BookingRepository
+public class BookingRepository : IBookingRepository
 {
     public Task<List<CsvRow>> ReadRawRowsAsync(string path) =>
         CsvHelper.ReadRowsAsync(path);

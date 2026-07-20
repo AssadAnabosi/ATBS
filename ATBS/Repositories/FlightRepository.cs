@@ -2,7 +2,7 @@
 using ATBS.Models;
 
 namespace ATBS.Repositories;
-public class FlightRepository
+public class FlightRepository : IFlightRepository
 {
     public Task<List<CsvRow>> ReadRawRowsAsync(string path) =>
         CsvHelper.ReadRowsAsync(path);
@@ -13,7 +13,7 @@ public class FlightRepository
         return rows.Select(row => FlightCsv.FromRow(row.Fields)).ToList();
     }
 
-    public async Task<Flight> GetByIdAsync(int flightId)
+    public async Task<Flight?> GetByIdAsync(int flightId)
     {
         return (await GetAllAsync()).Where(f => f.FlightId == flightId).FirstOrDefault();
     }

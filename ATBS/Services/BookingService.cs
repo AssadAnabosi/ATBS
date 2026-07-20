@@ -5,10 +5,10 @@ namespace ATBS.Services;
 
 public class BookingService
 {
-    private readonly FlightRepository _flights;
-    private readonly BookingRepository _bookings;
+    private readonly IFlightRepository _flights;
+    private readonly IBookingRepository _bookings;
 
-    public BookingService(BookingRepository bookings, FlightRepository flights)
+    public BookingService(IBookingRepository bookings, IFlightRepository flights)
     {
         _bookings = bookings;
         _flights = flights;
