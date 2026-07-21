@@ -4,7 +4,7 @@ using ATBS.Services;
 using ATBS.Utils;
 using Moq;
 
-namespace ATBS.Tests;
+namespace ATBS.Tests.Services;
 
 public class FlightServiceShould
 {

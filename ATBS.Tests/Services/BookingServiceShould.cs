@@ -3,7 +3,7 @@ using ATBS.Repositories;
 using ATBS.Services;
 using Moq;
 
-namespace ATBS.Tests;
+namespace ATBS.Tests.Services;
 
 public class BookingServiceShould
 {

@@ -1,7 +1,7 @@
 using ATBS.Models;
 using ATBS.Repositories;
 
-namespace ATBS.Tests;
+namespace ATBS.Tests.Repositories;
 
 public class BookingCsvTests
 {

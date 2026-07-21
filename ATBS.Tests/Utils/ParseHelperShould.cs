@@ -1,6 +1,6 @@
 using ATBS.Utils;
 
-namespace ATBS.Tests;
+namespace ATBS.Tests.Utils;
 
 public class ParseHelperShould
 {

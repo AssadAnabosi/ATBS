@@ -3,7 +3,7 @@ using ATBS.Attributes;
 using ATBS.Models;
 using ATBS.Services;
 
-namespace ATBS.Tests;
+namespace ATBS.Tests.Utils;
 
 public class ValidationAndAttributeShould
 {
