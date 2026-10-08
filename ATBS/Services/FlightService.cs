@@ -5,10 +5,10 @@ namespace ATBS.Services;
 
 public class FlightService
 {
-    private FlightRepository _flights;
-    private ValidationService _validation;
+    private readonly IFlightRepository _flights;
+    private readonly IValidationService _validation;
 
-    public FlightService(FlightRepository flights, ValidationService validation)
+    public FlightService(IFlightRepository flights, IValidationService validation)
     {
         _flights = flights;
         _validation = validation;

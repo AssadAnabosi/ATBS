@@ -5,7 +5,7 @@ using ATBS.Attributes;
 
 namespace ATBS.Services;
 
-public class ValidationService
+public class ValidationService : IValidationService
 {
     public List<FieldConstraint> DescribeConstraints<T>()
     {
